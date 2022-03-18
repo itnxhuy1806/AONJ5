@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Tic Tac Toe</title>
+</head>
+
+<body>
+     <style>
+          table {
+               border-collapse: collapse;
+          }
+
+          td {
+               text-align: center;
+               border: 5px black solid;
+          }
+
+          .cell {
+               width: 100px;
+               height: 100px;
+               position: relative;
+               top: 50%;
+               font-size: 80px;
+               font-weight: bold;
+          }
+     </style>
+     <div align="center">
+          <h1 id="result" style="background-color:blue"></h1>
+     </div>
+     <table align="center">
+          <caption>
+               <h1 style="font-size:50px;">Tic tac Toe</h1>
+          </caption>
+          <tr>
+               <td>
+                    <div id="11" class="cell">
+                         <div>
+               </td>
+               <td>
+                    <div id="12" class="cell">
+                         <div>
+               </td>
+               <td>
+                    <div id="13" class="cell">
+                         <div>
+               </td>
+          </tr>
+          <tr>
+               <td>
+                    <div id="21" class="cell">
+                         <div>
+               </td>
+               <td>
+                    <div id="22" class="cell">
+                         <div>
+               </td>
+               <td>
+                    <div id="23" class="cell">
+                         <div>
+               </td>
+          </tr>
+          <tr>
+               <td>
+                    <div id="31" class="cell">
+                         <div>
+               </td>
+               <td>
+                    <div id="32" class="cell">
+                         <div>
+               </td>
+               <td>
+                    <div id="33" class="cell">
+                         <div>
+               </td>
+          </tr>
+
+     </table>
+    
+     <script>
+          let turn = 1;
+          let win = [[11, 12, 13], [11, 21, 31], [11, 22, 33], [21, 22, 23], [31, 32, 33], [12, 22, 32], [13, 23, 33], [13, 22, 31]];
+          let board = document.getElementsByClassName("cell");
+          for (var i = 0; i < board.length; i++) {
+               board[i].addEventListener("click", function () {
+                    if (Array.from(this.classList).indexOf("isMoved") > -1 || turn >= 100)
+                         return;
+                    let move = "O";
+                    let color = "red";
+                    if (turn % 2 == 0) {
+                         move = "X";
+                         color = "blue";
+                    }
+                    this.innerHTML = move;
+                    this.classList.add("isMoved");
+                    // this.classList.add(move);
+                    this.style.color = color;
+                    win.forEach(w => {
+                         let w0 = document.getElementById(w[0]).innerHTML;
+                         let w1 = document.getElementById(w[1]).innerHTML;
+                         let w2 = document.getElementById(w[2]).innerHTML;
+                         if (w0 == move && w1 == move && w2 == move) {
+                              document.getElementById("result").innerHTML = move + " win"
+                              turn = 100;
+                         }
+                    })
+                    turn++;
+                    if (turn == 10)
+                         document.getElementById("result").innerHTML = "Hòa";
+               })
+          }
+     </script>
+</body>
+
+</html>
